@@ -15,5 +15,5 @@ MonoBehaviour:
   characterName: Max
   walkSpeed: 7
   sprintSpeed: 12
-  jumpForce: 15
+  jumpForce: 10
   maxHealth: 100
