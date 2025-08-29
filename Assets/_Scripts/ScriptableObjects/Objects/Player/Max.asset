@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 377845d7cc03245439699a15187b4490, type: 3}
   m_Name: Max
   m_EditorClassIdentifier: 
-  characterName: 
-  walkSpeed: 0
-  sprintSpeed: 0
-  jumpForce: 0
-  maxHealth: 0
+  characterName: Max
+  walkSpeed: 7
+  sprintSpeed: 12
+  jumpForce: 15
+  maxHealth: 100
