@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    [Range(5, 100)]
     public int totalSlots = 20;
     public List<InventorySlot> slots = new List<InventorySlot>();
 

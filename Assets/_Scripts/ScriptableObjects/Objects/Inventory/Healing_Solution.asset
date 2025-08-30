@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Healing_Solution
   m_EditorClassIdentifier: 
   itemName: Healing_Solution
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: fe56bc881ae186b4c8c68c8ed252cbd3, type: 3}
   itemMaxStack: 5
   itemType: 2
   itemWorldPrefab: {fileID: 6284624696309263864, guid: 1d825c8658f8cc3468ddafe189b0747a, type: 3}

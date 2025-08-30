@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: USP
   m_EditorClassIdentifier: 
   itemName: USP
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: fb8342df8c97cde468aa6fdb36e5b38c, type: 3}
   itemMaxStack: 1
   itemType: 0
-  itemWorldPrefab: {fileID: 0}
+  itemWorldPrefab: {fileID: 4451299363109411410, guid: b806f67fb4b40d74eb42b2199582d3e8, type: 3}

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.UI;
 
 public class InventoryUi : MonoBehaviour
 {
@@ -58,7 +59,9 @@ public class InventoryUi : MonoBehaviour
     {
         Transform slot = uiSlots[slotIndex];
         slot.GetChild(3).gameObject.SetActive(true);
+        slot.GetChild(1).gameObject.SetActive(true);
         slot.GetComponentInChildren<TMP_Text>().text = playerInventory.slots[slotIndex].quantity.ToString();
+        slot.GetChild(1).GetComponent<Image>().sprite = playerInventory.slots[slotIndex].item.itemIcon;
     }
 
     private void EmptyUiSlot(int slotIndex)
@@ -66,5 +69,6 @@ public class InventoryUi : MonoBehaviour
         Transform slot = uiSlots[slotIndex];
 
         slot.GetChild(3).gameObject.SetActive(false);
+        slot.GetChild(1).gameObject.SetActive(false);
     }
 }
