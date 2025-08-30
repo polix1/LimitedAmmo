@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: FPSViewTransparentLessEqualDpeth
+  m_Name: FPSViewTransparentLessEqualDepth
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    passTag: FPSViewTransparentLessEqualDpeth
+    passTag: FPSViewTransparentLessEqualDepth
     Event: 500
     filterSettings:
       RenderQueueType: 0
@@ -41,7 +41,49 @@ MonoBehaviour:
       overrideCamera: 1
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
-      cameraFieldOfView: 40
+      cameraFieldOfView: 60
+--- !u!114 &-7886646702029133287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
+  m_Name: FPSViewAfterAllDepthLessEqual
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    passTag: RenderObjects
+    Event: 1000
+    filterSettings:
+      RenderQueueType: 0
+      LayerMask:
+        serializedVersion: 2
+        m_Bits: 256
+      PassNames: []
+    overrideMaterial: {fileID: 0}
+    overrideMaterialPassIndex: 0
+    overrideShader: {fileID: 0}
+    overrideShaderPassIndex: 0
+    overrideMode: 1
+    overrideDepthState: 1
+    depthCompareFunction: 4
+    enableWrite: 1
+    stencilSettings:
+      overrideStencilState: 0
+      stencilReference: 0
+      stencilCompareFunction: 8
+      passOperation: 0
+      failOperation: 0
+      zFailOperation: 0
+    cameraSettings:
+      overrideCamera: 1
+      restoreCamera: 1
+      offset: {x: 0, y: 0, z: 0, w: 0}
+      cameraFieldOfView: 60
 --- !u!114 &-5577033801244307185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,8 +125,8 @@ MonoBehaviour:
       overrideCamera: 1
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
-      cameraFieldOfView: 40
---- !u!114 &-2200766235985593100
+      cameraFieldOfView: 60
+--- !u!114 &-5018749053119897367
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,12 +136,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: FPSViewOpaqueAllDpeth
+  m_Name: FPSViewAfterAllDepth
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    passTag: FPSViewOpaqueAllDpeth
-    Event: 300
+    passTag: FPSViewAfterAllDepth
+    Event: 1000
     filterSettings:
       RenderQueueType: 0
       LayerMask:
@@ -125,7 +167,49 @@ MonoBehaviour:
       overrideCamera: 1
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
-      cameraFieldOfView: 40
+      cameraFieldOfView: 60
+--- !u!114 &-2200766235985593100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
+  m_Name: FPSViewOpaqueAllDepth
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    passTag: FPSViewOpaqueAllDepth
+    Event: 300
+    filterSettings:
+      RenderQueueType: 0
+      LayerMask:
+        serializedVersion: 2
+        m_Bits: 256
+      PassNames: []
+    overrideMaterial: {fileID: 8243980396678913872, guid: a170171912b4cdb40a2a707da74314b9, type: 3}
+    overrideMaterialPassIndex: 0
+    overrideShader: {fileID: 0}
+    overrideShaderPassIndex: 0
+    overrideMode: 1
+    overrideDepthState: 1
+    depthCompareFunction: 8
+    enableWrite: 1
+    stencilSettings:
+      overrideStencilState: 0
+      stencilReference: 0
+      stencilCompareFunction: 8
+      passOperation: 0
+      failOperation: 0
+      zFailOperation: 0
+    cameraSettings:
+      overrideCamera: 1
+      restoreCamera: 1
+      offset: {x: 0, y: 0, z: 0, w: 0}
+      cameraFieldOfView: 60
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +240,9 @@ MonoBehaviour:
   - {fileID: 4799176498951485611}
   - {fileID: -9086169672872583677}
   - {fileID: -5577033801244307185}
-  m_RendererFeatureMap: ad6b866f10d7b46cf4bc67bec44e75e1abf8674299199a42039e80b7d270e7810f917c604e659ab2
+  - {fileID: -5018749053119897367}
+  - {fileID: -7886646702029133287}
+  m_RendererFeatureMap: ad6b866f10d7b46cf4bc67bec44e75e1abf8674299199a42039e80b7d270e7810f917c604e659ab2e9e0f59f53d259ba192a8c189c008d92
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -192,11 +278,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: FPSViewTransparentAllDpeth
+  m_Name: FPSViewTransparentAllDepth
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    passTag: FPSViewTransparentAllDpeth
+    passTag: FPSViewTransparentAllDepth
     Event: 500
     filterSettings:
       RenderQueueType: 0
@@ -223,7 +309,7 @@ MonoBehaviour:
       overrideCamera: 1
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
-      cameraFieldOfView: 40
+      cameraFieldOfView: 60
 --- !u!114 &7833122117494664109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,14 +324,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   m_Settings:
-    AOMethod: 0
+    AOMethod: 1
     Downsample: 0
     AfterOpaque: 0
     Source: 1
     NormalSamples: 1
-    Intensity: 0.4
-    DirectLightingStrength: 0.25
-    Radius: 0.3
+    Intensity: 2
+    DirectLightingStrength: 0.552
+    Radius: 0.03
     Samples: 1
     BlurQuality: 0
     Falloff: 100
