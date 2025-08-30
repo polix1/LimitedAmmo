@@ -8,12 +8,17 @@ public class Item : MonoBehaviour, IItemInteractable
 
     public void OnItemInteract(Inventory playerInventory)
     {
-        playerInventory.AddItem(itemData, itemQuantity);
+        PickUp(playerInventory);
     }
 
     public void PickUp(Inventory inventory)
     {
-        inventory.AddItem(itemData, itemQuantity);
-        Destroy(gameObject);
+        inventory.AddItem(this);
+
+        if (itemQuantity <= 0) 
+        {
+            Destroy(gameObject);
+        }
+
     }
 }

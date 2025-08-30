@@ -8,7 +8,6 @@ public class Inventory : MonoBehaviour
     public int totalSlots = 20;
     public List<InventorySlot> slots = new List<InventorySlot>();
 
-    [SerializeField] Item debugItem;
 
     public event Action OnInventoryValuesChanged;
 
@@ -20,51 +19,44 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void Start()
+    public bool AddItem(Item item)
     {
-        AddItem(debugItem.itemData, debugItem.itemQuantity);
 
-        for (int i = 0; i < slots.Count; i++)
-        {
-            Debug.Log($"Slot index in inventory: {i} \n Slot contains item:{slots[i]?.item} \n Item in slot quantity: {slots[i]?.quantity} \n");
-        }
-    }
+        int remainingAmoutn = item.itemQuantity;
 
-
-    public bool AddItem(ItemSO item, int amount)
-    {
         foreach (var slots in slots)
         {
-            if(slots.item == item && slots.quantity < item.itemMaxStack)
+            if(slots.item == item.itemData && slots.quantity < item.itemData.itemMaxStack)
             {
-                int spaceLeftInSlot = item.itemMaxStack - slots.quantity;
-                int quantityToAddToSlot = Mathf.Min(spaceLeftInSlot, amount);
+                int spaceLeftInSlot = item.itemData.itemMaxStack - slots.quantity;
+                int quantityToAddToSlot = Mathf.Min(spaceLeftInSlot, remainingAmoutn);
 
                 slots.quantity += quantityToAddToSlot;
-                amount -= quantityToAddToSlot;
+                remainingAmoutn -= quantityToAddToSlot;
 
                 OnInventoryValuesChanged?.Invoke();
 
-                if (amount <= 0) return true; 
+                if (remainingAmoutn <= 0) break;
             }
         }
 
         foreach (var slot in slots)
         {
-            if(slot.item == null && amount > 0)
+            if(slot.item == null && remainingAmoutn > 0)
             {
-                int quantityToAddToSlot = Mathf.Min(item.itemMaxStack, amount);
+                int quantityToAddToSlot = Mathf.Min(item.itemData.itemMaxStack, remainingAmoutn);
 
-                slot.item = item;
+                slot.item = item.itemData;
                 slot.quantity = quantityToAddToSlot;
-                amount -= quantityToAddToSlot;
+                remainingAmoutn -= quantityToAddToSlot;
 
                 OnInventoryValuesChanged?.Invoke();
 
-                if (amount <= 0) return true;
+                if (remainingAmoutn <= 0) break;
             }
         }
 
-        return false;
+        item.itemQuantity = remainingAmoutn;
+        return remainingAmoutn <= 0;
     }
 }

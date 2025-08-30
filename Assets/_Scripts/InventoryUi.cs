@@ -28,6 +28,11 @@ public class InventoryUi : MonoBehaviour
         UpdateUI();
     }
 
+    private void Start()
+    {
+        UpdateUI();
+    }
+
     private void OnEnable()
     {
         if (playerInventory != null)

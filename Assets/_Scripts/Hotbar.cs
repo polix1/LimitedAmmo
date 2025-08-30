@@ -55,9 +55,6 @@ public class Hotbar : MonoBehaviour
                 selectedHotbarIndex = hotbarSize;
             }
         }
-
-        
-
     }
 
     public InventorySlot GetSelectedSlot()
