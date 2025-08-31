@@ -49,8 +49,8 @@
 
 ## 🚀 Development Roadmap  
 
-- [-] Movement system  
-- [.] Inventory system  
+- [x] Movement system  
+- [ ] Inventory system  
 - [ ] Health system  
 - [ ] Enemy AI system  
 - [ ] Shop system  
