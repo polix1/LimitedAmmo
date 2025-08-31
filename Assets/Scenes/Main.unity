@@ -1319,7 +1319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9262114ba5761c42bc4cc416714dcaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hotbarSize: 5
+  hotbarSizeMaxIndex: 4
 --- !u!1 &1424896520
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,17 +7,17 @@ public class Hotbar : MonoBehaviour
 {
     private Actions inputActions;
 
-    [Range(5, 100)]
-    public int hotbarSize;
+    [Range(4, 100)]
+    public int hotbarSizeMaxIndex;
 
     private Inventory playerInventory;
 
-    public int selectedHotbarIndex { get; private set; } = 0;
+    public int selectedHotbarIndex { get; private set; } = 1;
 
     public List<InventorySlot> hotbarSlots { get; private set; } = new List<InventorySlot>();
 
-    public event Action OnInventoryValuesUpdatedPass;
-    public event Action OnHotbarReady;
+    public event Action<int> OnInventoryValuesUpdatedPass;
+    public event Action<int> OnHotbarReady;
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class Hotbar : MonoBehaviour
     private void Start()
     {
         SetHotbarSlots();
-        OnHotbarReady?.Invoke();
+        OnHotbarReady?.Invoke(selectedHotbarIndex);
     }
 
     private void OnEnable()
@@ -52,24 +52,25 @@ public class Hotbar : MonoBehaviour
         float scrollWheelYAxis = inputActions.Ui.ScrollWheel.ReadValue<float>();
         
         if(scrollWheelYAxis > 0)
-        {
-            if(selectedHotbarIndex++ >= hotbarSize) 
+        {          
+            if(selectedHotbarIndex++ >= hotbarSizeMaxIndex) 
             {
-                selectedHotbarIndex = 0;
+                selectedHotbarIndex = 1;
             }
         }
         else if(scrollWheelYAxis < 0)
         {
-            if (selectedHotbarIndex-- <= 0)
+            if (selectedHotbarIndex-- <= 1)
             {
-                selectedHotbarIndex = hotbarSize;
+                selectedHotbarIndex = hotbarSizeMaxIndex;
             }
         }
+        OnInventoryValuesUpdatedPass?.Invoke(selectedHotbarIndex-1);
     }
 
     private void OnMainInventoryValuesChanged()
     {
-        OnInventoryValuesUpdatedPass?.Invoke();
+        OnInventoryValuesUpdatedPass?.Invoke(selectedHotbarIndex-1);
     }
 
     public InventorySlot GetSelectedSlot()
@@ -79,7 +80,7 @@ public class Hotbar : MonoBehaviour
 
     public void SetHotbarSlots()
     {
-        for (int i = playerInventory.slots.Count - hotbarSize; i < playerInventory.slots.Count; i++)
+        for (int i = playerInventory.slots.Count - hotbarSizeMaxIndex; i < playerInventory.slots.Count; i++)
         {
             hotbarSlots.Add(playerInventory.slots[i]);
         }

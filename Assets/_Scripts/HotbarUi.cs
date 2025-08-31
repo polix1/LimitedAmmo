@@ -12,7 +12,7 @@ public class HotbarUi : MonoBehaviour
 
     private void Awake()
     {
-        for (int i = 0; i < playerHotbar.hotbarSize; i++)
+        for (int i = 0; i < playerHotbar.hotbarSizeMaxIndex; i++)
         {
             GameObject uiSlotInstance = Instantiate(uiSlot, uiSlotHolder);
             uiSlots.Add(uiSlotInstance.GetComponent<UiSlot>());
@@ -20,7 +20,6 @@ public class HotbarUi : MonoBehaviour
     }
     private void Start()
     {
-        UpdateUi();
     }
 
     private void OnEnable()
@@ -41,10 +40,12 @@ public class HotbarUi : MonoBehaviour
         }
     }
 
-    private void UpdateUi()
+    private void UpdateUi(int selectedIndex)
     {
         for (int i = 0; i < playerHotbar.hotbarSlots.Count; i++)
         {
+            uiSlots[i].isSelected = false;
+            uiSlots[selectedIndex].isSelected = true;
             if (playerHotbar.hotbarSlots[i].item != null)
             {
                 UiSlot slot = uiSlots[i];
