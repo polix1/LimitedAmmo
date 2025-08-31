@@ -10,70 +10,50 @@ public class InventoryUi : MonoBehaviour
     [SerializeField] GameObject uiSlot;
 
 
-    private List<Transform> uiSlots = new List<Transform>();
+    public List<UiSlot> uiSlots = new List<UiSlot>();
 
     private void Awake()
     {
         for (int i = 0; i < playerInventory.totalSlots; i++)
         {
             GameObject uiSlotInstance = Instantiate(uiSlot, uiSlotHolder);
-            uiSlots.Add(uiSlotInstance.transform);
+            uiSlots.Add(uiSlotInstance.GetComponent<UiSlot>());
         }
-        if (playerInventory != null)
-            playerInventory.OnInventoryValuesChanged -= UpdateUI;
-
-        if (playerInventory != null)
-            playerInventory.OnInventoryValuesChanged += UpdateUI;
-
-        UpdateUI();
     }
 
     private void Start()
     {
-        UpdateUI();
+        UpdateUi();
     }
 
     private void OnEnable()
     {
         if (playerInventory != null)
-            playerInventory.OnInventoryValuesChanged += UpdateUI;
+            playerInventory.OnInventoryValuesChanged += UpdateUi;
     }
 
     private void OnDisable()
     {
         if (playerInventory != null)
-            playerInventory.OnInventoryValuesChanged -= UpdateUI;
+            playerInventory.OnInventoryValuesChanged -= UpdateUi;
     }
 
-    private void UpdateUI()
+    private void UpdateUi()
     {
         for (int i = 0; i < playerInventory.slots.Count; i++)
         {
             if (playerInventory.slots[i].item != null)
             {
-                SetUiSlot(i);
+                UiSlot slot = uiSlots[i];
+
+                slot.UpdateSlotUi(playerInventory.slots[i].item, playerInventory.slots[i].quantity);
             }
             else
             {
-                EmptyUiSlot(i);
+                UiSlot slot = uiSlots[i];
+
+                slot.UpdateSlotUi(null, 0);
             }
         }
-    }
-
-    private void SetUiSlot(int slotIndex) 
-    {
-        Transform slot = uiSlots[slotIndex];
-        slot.GetChild(3).gameObject.SetActive(true);
-        slot.GetChild(1).gameObject.SetActive(true);
-        slot.GetComponentInChildren<TMP_Text>().text = playerInventory.slots[slotIndex].quantity.ToString();
-        slot.GetChild(1).GetComponent<Image>().sprite = playerInventory.slots[slotIndex].item.itemIcon;
-    }
-
-    private void EmptyUiSlot(int slotIndex)
-    {
-        Transform slot = uiSlots[slotIndex];
-
-        slot.GetChild(3).gameObject.SetActive(false);
-        slot.GetChild(1).gameObject.SetActive(false);
     }
 }

@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -8,13 +8,16 @@ public class Hotbar : MonoBehaviour
     private Actions inputActions;
 
     [Range(5, 100)]
-    [SerializeField] int hotbarSize;
+    public int hotbarSize;
 
     private Inventory playerInventory;
 
     public int selectedHotbarIndex { get; private set; } = 0;
 
-    private List<InventorySlot> hotbarSlots = new List<InventorySlot>();
+    public List<InventorySlot> hotbarSlots { get; private set; } = new List<InventorySlot>();
+
+    public event Action OnInventoryValuesUpdatedPass;
+    public event Action OnHotbarReady;
 
     private void Awake()
     {
@@ -25,16 +28,23 @@ public class Hotbar : MonoBehaviour
     private void Start()
     {
         SetHotbarSlots();
+        OnHotbarReady?.Invoke();
     }
 
     private void OnEnable()
     {
         inputActions?.Ui.Enable();
+
+        if (playerInventory != null)
+            playerInventory.OnInventoryValuesChanged += OnMainInventoryValuesChanged;
     }
 
     private void OnDisable()
     {
         inputActions?.Ui.Disable();
+
+        if (playerInventory != null)
+            playerInventory.OnInventoryValuesChanged -= OnMainInventoryValuesChanged;
     }
 
     private void Update()
@@ -55,6 +65,11 @@ public class Hotbar : MonoBehaviour
                 selectedHotbarIndex = hotbarSize;
             }
         }
+    }
+
+    private void OnMainInventoryValuesChanged()
+    {
+        OnInventoryValuesUpdatedPass?.Invoke();
     }
 
     public InventorySlot GetSelectedSlot()
