@@ -5,6 +5,8 @@ public class Item : MonoBehaviour, IItemInteractable
     public ItemSO itemData;
     public int itemQuantity;
 
+    public bool isInInventory;
+
 
     public void OnItemInteract(Inventory playerInventory)
     {
@@ -15,10 +17,9 @@ public class Item : MonoBehaviour, IItemInteractable
     {
         inventory.AddItem(this);
 
-        if (itemQuantity <= 0) 
+        if(itemQuantity <= 0)
         {
             Destroy(gameObject);
         }
-
     }
 }

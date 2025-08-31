@@ -19,6 +19,8 @@ public class Hotbar : MonoBehaviour
     public event Action<int> OnInventoryValuesUpdatedPass;
     public event Action<int> OnHotbarReady;
 
+    private GameObject currentItem;
+
     private void Awake()
     {
         inputActions = new();
@@ -66,6 +68,7 @@ public class Hotbar : MonoBehaviour
             }
         }
         OnInventoryValuesUpdatedPass?.Invoke(selectedHotbarIndex-1);
+
     }
 
     private void OnMainInventoryValuesChanged()
@@ -73,10 +76,6 @@ public class Hotbar : MonoBehaviour
         OnInventoryValuesUpdatedPass?.Invoke(selectedHotbarIndex-1);
     }
 
-    public InventorySlot GetSelectedSlot()
-    {
-        return playerInventory.slots[selectedHotbarIndex];
-    }
 
     public void SetHotbarSlots()
     {
@@ -85,4 +84,6 @@ public class Hotbar : MonoBehaviour
             hotbarSlots.Add(playerInventory.slots[i]);
         }
     }
+
+
 }

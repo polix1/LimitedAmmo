@@ -1,9 +1,5 @@
-using UnityEngine;
-
-
 [System.Serializable]
 public class InventorySlot
 {
-    public ItemSO item;
-    public int quantity;
+    public Item item;
 }

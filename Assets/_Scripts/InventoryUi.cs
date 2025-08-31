@@ -46,7 +46,7 @@ public class InventoryUi : MonoBehaviour
             {
                 UiSlot slot = uiSlots[i];
 
-                slot.UpdateSlotUi(playerInventory.slots[i].item, playerInventory.slots[i].quantity);
+                slot.UpdateSlotUi(playerInventory.slots[i].item.itemData, playerInventory.slots[i].item.itemQuantity);
             }
             else
             {

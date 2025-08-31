@@ -50,7 +50,7 @@ public class HotbarUi : MonoBehaviour
             {
                 UiSlot slot = uiSlots[i];
 
-                slot.UpdateSlotUi(playerHotbar.hotbarSlots[i].item, playerHotbar.hotbarSlots[i].quantity);
+                slot.UpdateSlotUi(playerHotbar.hotbarSlots[i].item.itemData, playerHotbar.hotbarSlots[i].item.itemQuantity);
             }
             else
             {
