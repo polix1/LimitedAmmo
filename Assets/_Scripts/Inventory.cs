@@ -57,7 +57,7 @@ public class Inventory : MonoBehaviour
 
 
                 GameObject itemStack = Instantiate(item.itemData.itemWorldPrefab, itemPoolParent);
-                Item itemInstance = itemStack.AddComponent<Item>();
+                Item itemInstance = itemStack.GetComponent<Item>();
                 itemInstance.itemData = item.itemData;
                 itemInstance.itemQuantity = toAdd;
                 itemStack.SetActive(false);
@@ -82,9 +82,20 @@ public class Inventory : MonoBehaviour
 
         foreach (KeyValuePair<Item, GameObject> pooledItems in itemPool)
         {
-            Console.WriteLine($"Key: {pooledItems.Key}, Value: {pooledItems.Value}");
+            Debug.Log($"Key: {pooledItems.Key}, Value: {pooledItems.Value}");
         }
         item.itemQuantity = remainingAmoutn;
         return remainingAmoutn <= 0;
+    }
+
+    public GameObject GetItem(Item item)
+    {
+        if (item == null) return null;
+
+        if(itemPool.ContainsKey(item))
+        {
+            return itemPool[item];
+        }
+        return null;
     }
 }

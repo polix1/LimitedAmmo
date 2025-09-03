@@ -21,6 +21,8 @@ public class Hotbar : MonoBehaviour
 
     private GameObject currentItem;
 
+    [SerializeField] Transform itemHolder;
+
     private void Awake()
     {
         inputActions = new();
@@ -59,6 +61,8 @@ public class Hotbar : MonoBehaviour
             {
                 selectedHotbarIndex = 1;
             }
+            OnInventoryValuesUpdatedPass?.Invoke(selectedHotbarIndex - 1);
+            UpdateObjectInHand();
         }
         else if(scrollWheelYAxis < 0)
         {
@@ -66,8 +70,9 @@ public class Hotbar : MonoBehaviour
             {
                 selectedHotbarIndex = hotbarSizeMaxIndex;
             }
+            OnInventoryValuesUpdatedPass?.Invoke(selectedHotbarIndex - 1);
+            UpdateObjectInHand();
         }
-        OnInventoryValuesUpdatedPass?.Invoke(selectedHotbarIndex-1);
 
     }
 
@@ -82,6 +87,27 @@ public class Hotbar : MonoBehaviour
         for (int i = playerInventory.slots.Count - hotbarSizeMaxIndex; i < playerInventory.slots.Count; i++)
         {
             hotbarSlots.Add(playerInventory.slots[i]);
+        }
+    }
+
+    void UpdateObjectInHand()
+    {
+        foreach (var slot in hotbarSlots)
+        {
+            if(slot.item != null)
+            {
+                playerInventory.GetItem(slot.item).SetActive(false);
+
+            }
+        }
+
+        if (hotbarSlots[selectedHotbarIndex-1].item != null)
+        {
+            GameObject itemObject = playerInventory.GetItem(hotbarSlots[selectedHotbarIndex - 1].item);
+            itemObject.SetActive(true);
+            
+            //TODO : change the layers of the children 
+
         }
     }
 

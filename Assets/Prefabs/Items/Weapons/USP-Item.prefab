@@ -220,6 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 60d857fd31bbded46920abbcec5e51b4, type: 2}
   itemQuantity: 1
+  isInInventory: 0
 --- !u!65 &9065934673832076728
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -235,7 +236,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
