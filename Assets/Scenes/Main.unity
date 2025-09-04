@@ -1355,7 +1355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fc9c65c7726d97419a8195e1c0a10a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactDistance: 10
+  interactDistance: 20
 --- !u!114 &1396826914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1890,7 +1890,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2384406714193074249, guid: 1d825c8658f8cc3468ddafe189b0747a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.503
+      value: 3.935
       objectReference: {fileID: 0}
     - target: {fileID: 2384406714193074249, guid: 1d825c8658f8cc3468ddafe189b0747a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1939,7 +1939,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 752114659824062665, guid: b806f67fb4b40d74eb42b2199582d3e8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.2635
+      value: 0.263
       objectReference: {fileID: 0}
     - target: {fileID: 752114659824062665, guid: b806f67fb4b40d74eb42b2199582d3e8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1947,7 +1947,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 752114659824062665, guid: b806f67fb4b40d74eb42b2199582d3e8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.5
+      value: 4.267
       objectReference: {fileID: 0}
     - target: {fileID: 752114659824062665, guid: b806f67fb4b40d74eb42b2199582d3e8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2681,7 +2681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2384406714193074249, guid: 1d825c8658f8cc3468ddafe189b0747a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.503
+      value: 3.749
       objectReference: {fileID: 0}
     - target: {fileID: 2384406714193074249, guid: 1d825c8658f8cc3468ddafe189b0747a, type: 3}
       propertyPath: m_LocalRotation.w

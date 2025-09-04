@@ -40,7 +40,10 @@ public class Hotbar : MonoBehaviour
         inputActions?.Ui.Enable();
 
         if (playerInventory != null)
+        {
             playerInventory.OnInventoryValuesChanged += OnMainInventoryValuesChanged;
+            playerInventory.OnInventoryValuesChanged += UpdateObjectInHand;
+        }
     }
 
     private void OnDisable()
@@ -48,7 +51,10 @@ public class Hotbar : MonoBehaviour
         inputActions?.Ui.Disable();
 
         if (playerInventory != null)
+        {
             playerInventory.OnInventoryValuesChanged -= OnMainInventoryValuesChanged;
+            playerInventory.OnInventoryValuesChanged -= UpdateObjectInHand;
+        }
     }
 
     private void Update()
@@ -105,8 +111,12 @@ public class Hotbar : MonoBehaviour
         {
             GameObject itemObject = playerInventory.GetItem(hotbarSlots[selectedHotbarIndex - 1].item);
             itemObject.SetActive(true);
-            
-            //TODO : change the layers of the children 
+
+            foreach (Transform transform in itemObject.GetComponentsInChildren<Transform>(true))
+            {
+                Debug.Log(transform.name);
+                transform.gameObject.layer = itemHolder.gameObject.layer;
+            }
 
         }
     }

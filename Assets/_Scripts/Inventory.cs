@@ -74,6 +74,8 @@ public class Inventory : MonoBehaviour
 
                 remainingAmoutn -= toAdd;
 
+                slot.item.isInInventory = true;
+
                 OnInventoryValuesChanged?.Invoke();
 
                 if (remainingAmoutn <= 0) break;
@@ -82,8 +84,10 @@ public class Inventory : MonoBehaviour
 
         foreach (KeyValuePair<Item, GameObject> pooledItems in itemPool)
         {
-            Debug.Log($"Key: {pooledItems.Key}, Value: {pooledItems.Value}");
+            Debug.Log(pooledItems.Key + " " + pooledItems.Value);
+            pooledItems.Value?.GetComponent<Item>().UpdatePhysics();
         }
+
         item.itemQuantity = remainingAmoutn;
         return remainingAmoutn <= 0;
     }
