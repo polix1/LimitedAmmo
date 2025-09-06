@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 public class Hotbar : MonoBehaviour
@@ -37,18 +38,20 @@ public class Hotbar : MonoBehaviour
 
     private void OnEnable()
     {
-        inputActions?.Ui.Enable();
+        inputActions?.Inventory.Enable();
+        inputActions.Inventory.Drop.started += DropCurrentItem;
 
         if (playerInventory != null)
         {
             playerInventory.OnInventoryValuesChanged += OnMainInventoryValuesChanged;
-            playerInventory.OnInventoryValuesChanged += UpdateObjectInHand;
+            playerInventory.OnInventoryValuesChanged += UpdateObjectInHand;          
         }
     }
 
     private void OnDisable()
     {
-        inputActions?.Ui.Disable();
+        inputActions.Inventory.Drop.started -= DropCurrentItem;
+        inputActions?.Inventory.Disable();
 
         if (playerInventory != null)
         {
@@ -59,7 +62,7 @@ public class Hotbar : MonoBehaviour
 
     private void Update()
     {
-        float scrollWheelYAxis = inputActions.Ui.ScrollWheel.ReadValue<float>();
+        float scrollWheelYAxis = inputActions.Inventory.ScrollWheel.ReadValue<float>();
         
         if(scrollWheelYAxis > 0)
         {          
@@ -119,6 +122,13 @@ public class Hotbar : MonoBehaviour
             }
 
         }
+
+
+    }
+
+    void DropCurrentItem(InputAction.CallbackContext context)
+    {
+        //TODO 
     }
 
 

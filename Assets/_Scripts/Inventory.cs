@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -101,5 +102,61 @@ public class Inventory : MonoBehaviour
             return itemPool[item];
         }
         return null;
+    }
+
+
+    //Removes the item completly from the inventory even if more than one
+    public void RemoveItem(Item item)
+    {
+        foreach(var slot in slots)
+        {
+            if(slot.item == item)
+            {
+                slot.item = null;
+
+                itemPool.Remove(item);
+            }
+        }
+    }
+
+    //Removes a spesific amount from a spesefic item.. not done [x]
+    public void SubtractItem(Item item, int amount)
+    {
+        foreach (var slot in slots)
+        {
+            if(slot.item == item)
+            {
+                slot.item.itemQuantity -= amount;
+            }
+        }
+    }
+
+    //Removes an item based on a spisfic type from all the inventory 
+    public void SubtractItemOfType(Item item, int amount)
+    {
+        int remainingAmount = amount;
+
+        foreach (var slot in slots)
+        {
+            if(slot.item != null && slot.item.itemData == item.itemData)
+            {
+                if(slot.item.itemQuantity >= remainingAmount)
+                {
+                    slot.item.itemQuantity -= remainingAmount;
+                    remainingAmount = 0;
+                    break;
+                }
+                else
+                {
+                    remainingAmount -= slot.item.itemQuantity;
+                    slot.item.itemQuantity = 0;
+
+                    slot.item = null;
+                }
+            }
+
+        }
+
+        OnInventoryValuesChanged?.Invoke();
     }
 }

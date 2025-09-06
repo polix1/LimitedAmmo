@@ -134,35 +134,7 @@
             ]
         },
         {
-            "name": "Camera",
-            "id": "3a23aecc-07e2-4046-82c9-9db9d51bbf31",
-            "actions": [
-                {
-                    "name": "Look",
-                    "type": "Value",
-                    "id": "d81e5b3b-0f44-4499-b306-dced2585ce2f",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "e3042cc0-3e28-4c48-87a6-11732789a701",
-                    "path": "<Mouse>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Ui",
+            "name": "Inventory",
             "id": "f147a0e1-8d47-4da6-9336-35b60fcf7c42",
             "actions": [
                 {
@@ -178,6 +150,33 @@
                     "name": "Numbers",
                     "type": "Button",
                     "id": "b4cd07cb-c56d-4573-9155-ebabc8c16b78",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Mouse1",
+                    "type": "Button",
+                    "id": "9c134f74-3e20-4c8f-ade4-0a2935db5e7a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Mouse2",
+                    "type": "Button",
+                    "id": "a0468d14-8303-40d5-8b33-e7dcd718eba2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Drop",
+                    "type": "Button",
+                    "id": "43226d46-1abe-4d35-8428-64cc3f932eb1",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -303,6 +302,67 @@
                     "processors": "Scale(factor=9)",
                     "groups": "",
                     "action": "Numbers",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "500a8a09-05c8-4ab4-8f15-be9bc082f8ac",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mouse1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a656503c-33b0-4052-afe9-27f155162b1d",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mouse2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f5e35fc6-0e54-47c1-b2d6-00d8e55f6c31",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Camera",
+            "id": "3a23aecc-07e2-4046-82c9-9db9d51bbf31",
+            "actions": [
+                {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "d81e5b3b-0f44-4499-b306-dced2585ce2f",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e3042cc0-3e28-4c48-87a6-11732789a701",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
