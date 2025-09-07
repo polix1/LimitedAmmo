@@ -35,7 +35,7 @@ public class Inventory : MonoBehaviour
 
         foreach (var slot in slots)
         {
-            if(slot.item != null && slot.item.itemData == item.itemData && slot.item.itemQuantity < item.itemData.itemMaxStack)
+            if (slot.item != null && slot.item.itemData == item.itemData && slot.item.itemQuantity < item.itemData.itemMaxStack)
             {
                 int spaceLeft = item.itemData.itemMaxStack - slot.item.itemQuantity;
                 int toAdd = Mathf.Min(spaceLeft, remainingAmoutn);
@@ -52,7 +52,7 @@ public class Inventory : MonoBehaviour
 
         foreach (var slot in slots)
         {
-            if(slot.item == null && remainingAmoutn > 0)
+            if (slot.item == null && remainingAmoutn > 0)
             {
                 int toAdd = Mathf.Min(item.itemData.itemMaxStack, remainingAmoutn);
 
@@ -97,66 +97,71 @@ public class Inventory : MonoBehaviour
     {
         if (item == null) return null;
 
-        if(itemPool.ContainsKey(item))
+        if (itemPool.ContainsKey(item))
         {
             return itemPool[item];
         }
         return null;
     }
 
-
-    //Removes the item completly from the inventory even if more than one
-    public void RemoveItem(Item item)
+    public bool SubtractItem(InventorySlot inventorySlot, int amount)
     {
-        foreach(var slot in slots)
-        {
-            if(slot.item == item)
-            {
-                slot.item = null;
+        int remainingAmoung = amount;
+        int indexOfSlot = slots.IndexOf(inventorySlot);
 
-                itemPool.Remove(item);
+        if (indexOfSlot != -1 && slots[indexOfSlot].item != null)
+        {
+            if (slots[indexOfSlot].item.itemQuantity >= amount)
+            {
+                slots[indexOfSlot].item.itemQuantity -= amount;
+
+                if (slots[indexOfSlot].item.itemQuantity == 0)
+                {
+                    slots[indexOfSlot].item = null;
+                    itemPool.Remove(inventorySlot.item);
+                }
+
+                OnInventoryValuesChanged?.Invoke();
+
+                return true;
             }
         }
+        return false;
     }
 
-    //Removes a spesific amount from a spesefic item.. not done [x]
-    public void SubtractItem(Item item, int amount)
-    {
-        foreach (var slot in slots)
-        {
-            if(slot.item == item)
-            {
-                slot.item.itemQuantity -= amount;
-            }
-        }
-    }
-
-    //Removes an item based on a spisfic type from all the inventory 
-    public void SubtractItemOfType(Item item, int amount)
+    public bool SubtractItemOfType(Item item, int amount)
     {
         int remainingAmount = amount;
 
         foreach (var slot in slots)
         {
-            if(slot.item != null && slot.item.itemData == item.itemData)
+            if (slot.item != null && slot.item.itemData == item.itemData)
             {
-                if(slot.item.itemQuantity >= remainingAmount)
+                if (slot.item.itemQuantity >= remainingAmount)
                 {
                     slot.item.itemQuantity -= remainingAmount;
-                    remainingAmount = 0;
-                    break;
+
+                    if (slot.item.itemQuantity == 0)
+                        slot.item = null;
+
+                    itemPool.Remove(slot.item);
+
+                    OnInventoryValuesChanged?.Invoke();
+
+                    return true;
                 }
                 else
                 {
                     remainingAmount -= slot.item.itemQuantity;
-                    slot.item.itemQuantity = 0;
-
                     slot.item = null;
+
+                    itemPool.Remove(slot.item);
                 }
             }
-
         }
 
         OnInventoryValuesChanged?.Invoke();
+        return remainingAmount == 0;
     }
 }
+
