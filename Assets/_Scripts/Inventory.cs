@@ -163,5 +163,7 @@ public class Inventory : MonoBehaviour
         OnInventoryValuesChanged?.Invoke();
         return remainingAmount == 0;
     }
+
+    //TODO[DELETE REMOVED ITEMS FROM THE POOL] [ ]
 }
 
