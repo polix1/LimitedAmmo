@@ -552,10 +552,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: USP-Item
       objectReference: {fileID: 0}
-    - target: {fileID: 4813605737866876471, guid: b806f67fb4b40d74eb42b2199582d3e8, type: 3}
-      propertyPath: itemQuantity
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4318,10 +4314,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1411217631338303378, guid: 1d825c8658f8cc3468ddafe189b0747a, type: 3}
-      propertyPath: itemQuantity
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 2384406714193074249, guid: 1d825c8658f8cc3468ddafe189b0747a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.732604
