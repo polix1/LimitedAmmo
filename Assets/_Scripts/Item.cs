@@ -12,6 +12,8 @@ public class Item : MonoBehaviour, IItemInteractable
     private Rigidbody itemRb;
     private Collider itemCollider;
 
+    [SerializeField] float mergeRadius = 10f;
+
 
     private void Awake()
     {
@@ -46,6 +48,30 @@ public class Item : MonoBehaviour, IItemInteractable
         {
             itemRb.isKinematic = false;
             itemCollider.isTrigger = false;
+
+            Collider[] hits = Physics.OverlapSphere(transform.position, mergeRadius);
+            
+
+            foreach(Collider hit in hits)
+            {
+                if (hit.gameObject == gameObject) continue;
+
+                Item item = hit.GetComponent<Item>();
+                if (item !=  null)
+                {
+                    if (item.itemData == itemData && !item.isInInventory)
+                    {
+                        if (itemQuantity + item.itemQuantity <= itemData.itemMaxStack)
+                        {
+                            Debug.Log(hit.name);
+                            item.itemQuantity += itemQuantity;
+                            Destroy(gameObject); // add effects to show the player the merge [ ]
+                            return;
+                        }
+
+                    }
+                }
+            }
         }
     }
 }

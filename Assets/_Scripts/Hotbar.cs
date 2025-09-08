@@ -117,7 +117,6 @@ public class Hotbar : MonoBehaviour
 
             foreach (Transform transform in itemObject.GetComponentsInChildren<Transform>(true))
             {
-                Debug.Log(transform.name);
                 transform.gameObject.layer = itemHolder.gameObject.layer;
             }
 
@@ -128,7 +127,7 @@ public class Hotbar : MonoBehaviour
 
     void DropCurrentItem(InputAction.CallbackContext context)
     {
-        //TODO 
+        playerInventory.DropItem(hotbarSlots[selectedHotbarIndex - 1], false, 1, 1);
     }
 
 

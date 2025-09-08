@@ -220,8 +220,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 60d857fd31bbded46920abbcec5e51b4, type: 2}
-  itemQuantity: 1
+  itemQuantity: 20
   isInInventory: 0
+  mergeRadius: 1
 --- !u!65 &9065934673832076728
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -269,7 +270,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1 &6191989386620702959
 GameObject:
   m_ObjectHideFlags: 0

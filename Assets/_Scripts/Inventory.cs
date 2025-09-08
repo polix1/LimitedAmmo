@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -85,7 +86,6 @@ public class Inventory : MonoBehaviour
 
         foreach (KeyValuePair<Item, GameObject> pooledItems in itemPool)
         {
-            Debug.Log(pooledItems.Key + " " + pooledItems.Value);
             pooledItems.Value?.GetComponent<Item>().UpdatePhysics();
         }
 
@@ -104,7 +104,31 @@ public class Inventory : MonoBehaviour
         return null;
     }
 
-    public bool SubtractItem(InventorySlot inventorySlot, int amount)
+    
+
+    public void RemoveItem(Item item)
+    {
+        if (itemPool.ContainsKey(item))
+        {
+            Destroy(itemPool[item]);
+            itemPool.Remove(item);
+        }
+    }
+
+    public void RemoveItemFromSlot(InventorySlot slot)
+    {
+        int indexOfSlot = slots.IndexOf(slot);
+
+        if (indexOfSlot != -1 && slots[indexOfSlot].item != null)
+        {
+            RemoveItem(slots[indexOfSlot].item);
+            slots[indexOfSlot].item = null;
+
+            OnInventoryValuesChanged?.Invoke();
+        }
+    }
+
+    public bool SubtractItemFromSlot(InventorySlot inventorySlot, int amount)
     {
         int remainingAmoung = amount;
         int indexOfSlot = slots.IndexOf(inventorySlot);
@@ -117,8 +141,7 @@ public class Inventory : MonoBehaviour
 
                 if (slots[indexOfSlot].item.itemQuantity == 0)
                 {
-                    slots[indexOfSlot].item = null;
-                    itemPool.Remove(inventorySlot.item);
+                    RemoveItemFromSlot(inventorySlot);
                 }
 
                 OnInventoryValuesChanged?.Invoke();
@@ -135,16 +158,18 @@ public class Inventory : MonoBehaviour
 
         foreach (var slot in slots)
         {
-            if (slot.item != null && slot.item.itemData == item.itemData)
+            if (item != null && slot.item != null && slot.item.itemData == item.itemData)
             {
                 if (slot.item.itemQuantity >= remainingAmount)
                 {
                     slot.item.itemQuantity -= remainingAmount;
 
                     if (slot.item.itemQuantity == 0)
-                        slot.item = null;
+                    {
 
-                    itemPool.Remove(slot.item);
+                        RemoveItem(slot.item);
+                        slot.item = null;
+                    }
 
                     OnInventoryValuesChanged?.Invoke();
 
@@ -153,9 +178,10 @@ public class Inventory : MonoBehaviour
                 else
                 {
                     remainingAmount -= slot.item.itemQuantity;
+
+                    RemoveItem(slot.item);
                     slot.item = null;
 
-                    itemPool.Remove(slot.item);
                 }
             }
         }
@@ -164,6 +190,42 @@ public class Inventory : MonoBehaviour
         return remainingAmount == 0;
     }
 
-    //TODO[DELETE REMOVED ITEMS FROM THE POOL] [ ]
+    public void DropItem(InventorySlot slot, bool dropAll, float dropForce, int amount)
+    {
+        GameObject itemStack = Instantiate(slot.item.itemData.itemWorldPrefab);
+        itemStack.layer = 0;
+
+
+        itemStack.transform.position = itemPoolParent.transform.position;
+        itemStack.transform.rotation = itemPoolParent.transform.rotation;
+        Item itemInstance = itemStack.GetComponent<Item>();
+        itemInstance.itemData = slot.item.itemData;
+
+
+        Rigidbody itemRb = itemStack.GetComponent<Rigidbody>();
+        Collider itemCol = itemStack.GetComponent<Collider>();
+
+        itemInstance.isInInventory = false;
+
+        itemRb.AddForce(Camera.main.transform.forward * dropForce, ForceMode.Impulse);
+
+
+        if (dropAll)
+        {
+            itemInstance.itemQuantity = slot.item.itemQuantity;
+            RemoveItemFromSlot(slot);
+        }
+        else
+        {
+            itemInstance.itemQuantity = amount;
+            SubtractItemFromSlot(slot, amount);
+        }
+
+        itemInstance.UpdatePhysics();
+
+        OnInventoryValuesChanged?.Invoke();
+
+    }
+
 }
 
