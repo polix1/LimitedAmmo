@@ -19,10 +19,14 @@ public class InventoryUi : MonoBehaviour
             GameObject uiSlotInstance = Instantiate(uiSlot, uiSlotHolder);
             uiSlots.Add(uiSlotInstance.GetComponent<UiSlot>());
         }
-    }
+    } 
 
     private void Start()
     {
+        for (int i = 0; i < playerInventory.slots.Count; i++)
+        {
+            uiSlots[i].InventorySlot = playerInventory.slots[i];
+        }
         UpdateUi();
     }
 

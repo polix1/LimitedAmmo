@@ -552,6 +552,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: USP-Item
       objectReference: {fileID: 0}
+    - target: {fileID: 4813605737866876471, guid: b806f67fb4b40d74eb42b2199582d3e8, type: 3}
+      propertyPath: itemQuantity
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
