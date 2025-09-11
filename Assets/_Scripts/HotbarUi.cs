@@ -16,6 +16,7 @@ public class HotbarUi : MonoBehaviour
         {
             GameObject uiSlotInstance = Instantiate(uiSlot, uiSlotHolder);
             uiSlots.Add(uiSlotInstance.GetComponent<UiSlot>());
+            uiSlots[i].GetComponent<UiSlot>().slotType = SlotType.Hotbar;
         }
     }
     private void Start()

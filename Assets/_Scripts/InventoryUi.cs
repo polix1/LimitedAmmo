@@ -1,23 +1,41 @@
 using UnityEngine;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.InputSystem;
 
 public class InventoryUi : MonoBehaviour
 {
+    public static InventoryUi Instance;
+
     [SerializeField] Inventory playerInventory;
     [SerializeField] Transform uiSlotHolder;
     [SerializeField] GameObject uiSlot;
+    public Transform moverTransform;
+    public Image moverImage;
+    public TMP_Text moverCount;
+
+    Vector2 mousePosition;
 
 
     public List<UiSlot> uiSlots = new List<UiSlot>();
 
     private void Awake()
     {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(Instance);
+        }
+
         for (int i = 0; i < playerInventory.totalSlots; i++)
         {
             GameObject uiSlotInstance = Instantiate(uiSlot, uiSlotHolder);
             uiSlots.Add(uiSlotInstance.GetComponent<UiSlot>());
+            uiSlots[i].GetComponent<UiSlot>().slotType = SlotType.MainInventory;
         }
     } 
 
@@ -59,5 +77,18 @@ public class InventoryUi : MonoBehaviour
                 slot.UpdateSlotUi(null, 0);
             }
         }
+    }
+
+    private void Update()
+    {
+        if(Mouse.current != null)
+        {
+            mousePosition = Mouse.current.position.ReadValue();
+        }
+    }
+
+    private void LateUpdate()
+    {
+        moverTransform.GetComponent<RectTransform>().position = mousePosition;
     }
 }

@@ -2,19 +2,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System.Collections.Generic;
 using System;
 
 public class UiSlot : MonoBehaviour, IPointerClickHandler
 {
+    public SlotType slotType;
+
     public Image icon;
     public TMP_Text quanitytText;
     public GameObject slotSelectHighlight;
     public bool isSelected = false;
     public InventorySlot InventorySlot;
-
-    public event Action<InventorySlot> OnSlotValuesChanged;
-
 
 
     public void UpdateSlotUi(ItemSO itemData, int quantity)
@@ -45,6 +43,8 @@ public class UiSlot : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (slotType == SlotType.Hotbar) return;
+
         //PickUp
         if (MoverSlot.item == null && InventorySlot.item != null)
         {
@@ -86,10 +86,26 @@ public class UiSlot : MonoBehaviour, IPointerClickHandler
             MoverSlot.item = temp;
         }
 
+        UpdateMoverUi();
 
         if (InventorySlot.item != null)
             UpdateSlotUi(InventorySlot.item.itemData, InventorySlot.item.itemQuantity);
         else
             UpdateSlotUi(null, 0); // clear the slot UI
+    }
+
+
+    private void UpdateMoverUi()
+    {
+        if (MoverSlot.item != null)
+        {
+            InventoryUi.Instance.moverTransform.gameObject.SetActive(true);
+            InventoryUi.Instance.moverImage.sprite = MoverSlot.item.itemData.itemIcon;
+            InventoryUi.Instance.moverCount.text = MoverSlot.item.itemQuantity.ToString();
+        }
+        else
+        {
+            InventoryUi.Instance.moverTransform.gameObject.SetActive(false);
+        }
     }
 }
